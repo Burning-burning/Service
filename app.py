@@ -253,13 +253,6 @@ def comment(id):
         comment = request.form['comment']
         email = request.form['email']
         vcode = request.form['vcode']
-        # if comment == '':
-        #     return "False, please input the comment."
-        # elif email == '':
-        #     return "False, please input the email."
-        # elif vcode == '':
-        #     return "False, please input the vcode."
-        # else:
         if Serverdatabase.check_words(comment) and Serverdatabase.check_words(email) and Serverdatabase.check_words(
                 vcode):
             if session['captcha'] == vcode:
@@ -271,8 +264,6 @@ def comment(id):
                 info1 = Serverdatabase.article1(id)
                 info2 = Serverdatabase.get_article_catalogue_info(id)
                 info3 = Serverdatabase.get_count(id)
-                # return redirect(url_for('title'), id = id)
-
                 tool = Tool()
                 return render_template('article.html', info=info, info1=info1, info2=info2, id=id, info3=info3,
                                        tool=tool)
@@ -337,15 +328,7 @@ def like(id):
         # info4 =
         Serverdatabase.increase_count(id)
     else:
-        # info4 = \
         Serverdatabase.decrease_count(id)
-    # info = Serverdatabase.article(id)
-    # info1 = Serverdatabase.article1(id)
-    # info2 = Serverdatabase.get_article_catalogue_info(id)
-    # info3 = Serverdatabase.get_count(id)
-    # tool = Tool()
-    # return render_template('article.html', info=info, info1=info1, info2=info2, id=id, info3=info3, tool=tool, info4=info4)
-
 
 class Verify:
     # 生成随机字母

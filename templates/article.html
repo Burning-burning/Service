@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+     <script type = "text/javascript">
+        function YanZhen()
+       {
+           var email = document.getElementById("email");
+           //邮件格式
+           reg = /^([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/gi;
+           //非空验证
+           if (email.value == "") {
+               alert("Please input your email");
+
+               return false;
+           }
+           //格式验证
+           else if(!reg.test(email.value))
+           {
+               alert("The mailbox format is not correct, please re-enter it!");
+                return false;
+           }
+           else {
+               return true;
+           }
+       }
+
+    </script>
+    <style>
+#head{
+	align-content: center;
+	background-color:#f8f8f8;
+	clear: both;
+	margin-left: 10%;
+	margin-right: 10%;
+	padding-bottom: 5px;
+	}
+#h1{
+	align-content: center;
+	text-align: center;
+	margin-top: 10px;
+	padding-top: 10px;
+	}
+	#content{
+		margin-left: 5%;
+	    margin-right: 5%;
+		margin-bottom: 5px;
+	}
+#head #content pre {
+	padding: 4px;
+	background-color: #FFFFFF;
+	border-style:solid;
+	border-radius: 3px;
+	border-color: #ADB5B4;
+}
+	textarea{
+	border-radius: 3px;
+	}
+	.comment{
+		border-style: solid;
+		padding: 4px;
+		border-color: #B4AEAE;
+		margin-bottom: 8px;
+		border-width: thin;
+	}
+        li{
+            list-style: none;
+        }
+        #email{
+            width: 260px;
+        }
+.like{ font-size:30px;
+   color:#ccc;
+   cursor:pointer;
+   margin-top: 0;
+   margin-bottom: 0;
+}
+.cs{color:#f00;}
+
+</style>
+
+</head><script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.js"></script>
+
+<body>
+
+<br/>
+
+<div id="head">
+
+{% autoescape false %}
+    {% for item in info1 %}
+    <li>
+  <h1 id="h1">{{ item[2] }}</h1>
+
+        <div align="center">
+            <span>  email:<a href = "{{ url_for('author', email =item[5])}} ">{{ tool.jiami(item[5]) }}</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <span>date:{{ item[7] }}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    {% autoescape false %}
+{% for i in info2 %}
+        <span> catalogue:{{ i[1] }}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+{% endfor %}
+{% endautoescape %}
+    {% autoescape false %}
+        {% for item in info3 %}
+            <span> browse:{{ item[1] }}</span>
+        {% endfor %}
+        {% endautoescape %}
+
+    </div>
+  <hr>
+  <br/><div id="content">
+  <p>Abstract: </p>
+  <pre>{{ item[3] }}</pre>
+  <p>Highlight:</p>
+  <pre>{{ item[4] }}</pre>
+
+    </div> </li>
+    {% endfor %}
+{% endautoescape %}
+
+
+
+
+
+<div id = "content">
+   <p>Comments:</p>
+
+{% autoescape false %}
+{% for item in info %}
+
+
+  <div class="comment"><pre class="comment"><li>{{ item[2] }}</li><br/></pre>
+      email:{{ tool.jiami(item[3]) }}
+
+      <br/>
+      <p class="like1">&#10084;</p>
+
+{#      <button id="btn_zan">0</button>&nbsp;&nbsp;#}
+      time: {{ item[4] }}
+{#  don't like:<button id="btn_cai">0</button>#}
+
+  </div>
+
+  {% endfor %}
+{% endautoescape %}
+  </div><br/>
+
+<div id = "content"><form action="{{ url_for("comment",id = id) }}" method="post" onsubmit="return YanZhen()">
+    Add comment:<br/> <textarea rows="5" cols="60" name = "comment" required = required ></textarea><br/>
+    <input type = "text" required = required name = "email" id = "email" placeholder="Please input your email" ></br>
+        <img id="imgimg" src="" alt = "verify_code" >
+    <script>
+        let img = document.getElementById('imgimg')
+        img.setAttribute('src', '../static/vcode/vcode.jpg?' + Math.random())
+    </script>
+    <br/>
+
+        <input type = "text" required = required class="form-control" id = "vcode" name = "vcode" placeholder="please input verify code">
+   <br>
+    <input type="submit" value="Submit">
+</form></div>
+  <br>
+{#<script type="text/javascript">#}
+{#    var i = 0;#}
+{#    function dianZan() {#}
+{#        let id = document.getElementById("like");#}
+{#        if(i++ %2 == 0){#}
+{#            id.style.backgroundColor = "#ff0000"#}
+{#        }#}
+{#        else {#}
+{#            id.style.backgroundColor = "#f8f8f8"#}
+{##}
+{#        }#}
+{#    }#}
+{#</script>#}
+<div>
+{% autoescape false %}
+    {% for item in info1 %}
+    <li>
+        <div align="center">{{ item[1] }}<button id="download"><a href="/download/{{ item[1] }}">download</a></button>&nbsp;&nbsp;&nbsp;&nbsp;
+
+            like:<button id="like" style = "backgroundColor:#f8f8f8; width: 28px; height: 28px">
+
+    </button>&nbsp;&nbsp;&nbsp;&nbsp;
+    </li>
+
+
+        {% endfor %}
+{% endautoescape %}
+     {% autoescape false %}
+                {% for item in info4 %}
+                <li>{{ item[1] }}  </li>
+                {% endfor %}
+            {% endautoescape %}
+  </div>
+
+</div>
+
+
+
+<script type="text/javascript">
+    let btn = document.getElementById('like')
+    let i = 0
+    function colorRGB2Hex(color) {
+        var rgb = color.split(',');
+        var r = parseInt(rgb[0].split('(')[1]);
+        var g = parseInt(rgb[1]);
+        var b = parseInt(rgb[2].split(')')[0]);
+        var hex = "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+        return hex;
+     }
+    btn.addEventListener('click', function () {
+        if(i++ %2 == 0){
+            this.style.backgroundColor = "#ff0000"
+        }
+        else {
+            this.style.backgroundColor = "#f8f8f8"
+        }
+        let loc = window.location.href
+        loc = loc.substr(loc.lastIndexOf('/') + 1, loc.length + 1)
+        fetch('/like/' + loc, {
+            method: 'POST',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              },
+            body: 'color='+colorRGB2Hex(this.style.backgroundColor)
+        }).then()
+    })
+
+</script>
+
+
+<script typet="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".like1").click(function () {
+                $(this).toggleClass('cs');
+            })
+        })
+    </script>
+</body>
+</html>

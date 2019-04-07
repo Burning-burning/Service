@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+    <style>
+#head{
+	align-content: center;
+	background-color:#f8f8f8;
+	clear: both;
+	margin-left: 10%;
+	margin-right: 10%;
+	padding-bottom: 5px;
+	}
+#h1{
+	align-content: center;
+	text-align: center;
+	margin-top: 10px;
+	padding-top: 10px;
+	}
+	#content{
+		margin-left:20%;
+	    margin-right: 20%;
+		margin-bottom: 5px;
+	}
+#head #content pre {
+	padding: 4px;
+	background-color: #FFFFFF;
+	border-style:solid;
+	border-radius: 3px;
+	border-color: #ADB5B4;
+}
+	textarea{
+	border-radius: 3px;
+	}
+	.comment{
+		border-style: solid;
+		padding: 4px;
+		border-color: #B4AEAE;
+		margin-bottom: 8px;
+		border-width: thin;
+	}
+        li{
+            list-style: none;
+        }
+        #email{
+            width: 260px;
+        }
+
+</style>
+<style type="text/css">
+	#head{
+	align-content: center;
+	height: 60px;
+	background-color: #f8f8f8;
+	clear: both;
+	margin-left: 20%;
+	margin-right: 20%;
+
+	}
+	#h1{
+	align-content: center;
+	text-align: center;
+	margin-top: 10px;
+	padding-top: 10px;
+	}
+
+    .li{
+		list-style-type: none;
+		background-color: #f8f8f8;
+	    margin-top: 20px;
+	    padding: 15px;
+		margin-right: 20.5%;
+		margin-left: 17.4%;
+	}
+
+li:hover{
+    background-color: aliceblue;
+}
+#select {
+	background-color: #f8f8f8;
+	height: 90px;
+	margin-left: 20%;
+	margin-top: 20px;
+	margin-right: 20%;
+	padding-top: 20px;
+	font-size: large;
+}
+#select form {
+
+}
+	.input{
+	width: 400px;
+	height: 30px;
+	border-radius: 6px;
+    font-size: 12pt;
+	}
+
+</style>
+<body>
+<h1>Author page</h1>
+
+<ol>
+{% autoescape false %}
+{% for item in info %}
+    <li class="li"> <div class="content"><h1><a href = "/{{ item[0] }}">{{ item[2] }}</a> </h1> <h2>{{ item[3] }} </h2> <p>{{ item[4] }}</p><p> {{ tool.jiami(item[5]) }}</p><p> {{ item[7] }}</p></div></li>
+{% endfor %}
+{% endautoescape %}
+
+<div id = "content">
+   <p>Comments:</p>
+
+{% autoescape false %}
+{% for item in info1 %}
+
+
+  <div class="comment"><pre class="comment"><li>{{ item[2] }}</li><br/></pre>
+      email:{{ tool.jiami(item[3]) }}
+
+      <br/>
+      like:<button id="btn_zan">0</button>&nbsp;&nbsp;
+      time: {{ item[4] }}
+{#  don't like:<button id="btn_cai">0</button>#}
+
+  </div>
+
+  {% endfor %}
+{% endautoescape %}
+  </div><br/>
+</ol>
+</body>
+</html>

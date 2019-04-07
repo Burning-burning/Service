@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <script type = "text/javascript">
+        {#var id;#}
+        {#id = document.getElementById("image").setAttribute('src', '../static/vcode/vcode'+ Math.random()+'.jpg');#}
+        function YanZhen()
+
+       {
+
+           var email = document.getElementById("email");
+
+           //邮件格式
+           reg = /^([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/gi;
+           //非空验证
+
+           {#if (email.value == "") {#}
+           {#    alert("Please input your email");#}
+           {##}
+           {#    return false;#}
+           {#}#}
+           //格式验证
+          if(!reg.test(email.value))
+           {
+               alert("The mailbox format is not correct, please re-enter it!");
+                return false;
+           }
+           else {
+               return true;
+           }
+       }
+
+    </script>
+{#    使用jinjia导入两个js#}
+    <script src="{{ url_for('static', filename='tinymce/js/tinymce/tinymce.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tinymce_setup.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">ZJNU Publishing Service</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('catalogue') }}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('donate') }}">Donate</a>
+      </li>
+    </ul>
+
+  </div>
+</nav>
+<br/>
+<br/>
+<div style="width: 60%;margin-left: 20%;margin-right: 20%">
+
+
+
+
+</div>
+
+
+
+<br/>
+<form  method="post" action="/upload/{{ id1 }}" enctype="multipart/form-data" onsubmit="return YanZhen()">
+<div class="input-group mb-3" style="width: 60%;margin-left: 20%;margin-right: 20%">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
+  </div>
+  <input type="text" required = required class="form-control" id = "title" name = "title" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+</div>
+
+<br/>
+<div class="input-group mb-3" style="width: 60%;margin-left: 20%;margin-right: 20%">
+    <div class="form-group">
+        <label for="exampleFormControlFile1">Example file input</label>
+        <input type="file" required = required class="form-control-file" name = "myfile" id="exampleFormControlFile1">
+    </div>
+</div>
+<br/>
+<div class="input-group" style="width: 60%;margin-left: 20%;margin-right: 20%">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Abstract</span>
+  </div>
+  <textarea class="form-control" required = required aria-label="With textarea" name = 'abstract' id = "abstract"></textarea>
+</div>
+<br/>
+
+<div style="width: 60%;margin-left: 20%;margin-right: 20%">
+
+        <input class="editor" name="content" id="content">
+
+
+</div>
+
+<br/><br/>
+
+    <div class="input-group mb-3" style="width: 60%;margin-left: 20%;margin-right: 20%">
+        <img id="imgimg" src="" alt = "verify_code" >
+
+    </div>
+    <script>
+        let img = document.getElementById('imgimg')
+        img.setAttribute('src', '../static/vcode/vcode.jpg?' + Math.random())
+    </script>
+    <br/>
+
+     <div class="input-group mb-3" style="width: 60%;margin-left: 20%;margin-right: 20%">
+        <input type = "text" required = required class="form-control" id = "vcode" name = "vcode" placeholder="please input verify code">
+
+    </div>
+    <br/>
+<div class="input-group mb-3" style="width: 60%;margin-left: 20%;margin-right: 20%">
+  <input type="text" required = required class="form-control" id = "email" name = "email" placeholder="Please input your email" aria-label="Recipient's username" aria-describedby="button-addon2">
+
+    <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Submit</button>
+
+  </div>
+</div>
+
+<br/>
+
+</form>
+</body>
+</html>

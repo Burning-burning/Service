@@ -46,18 +46,11 @@ ALLOWED_EXTENSIONS = set(['pdf', 'jpg', 'xlxs', 'doc', 'docx', 'txt', 'ppt', 'pp
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
-
+#下载文件
 @app.route("/download/<filename>")
 def download(filename):
     dirpath = os.path.join(app.root_path, 'static/upload')  # 这里是下在目录，从工程的根目录写起，比如你要下载static/js里面的js文件，这里就要写“static/js”
     return send_from_directory(dirpath, filename, as_attachment=True)  # as_attachment=True 一定要写，不然会变成打开，而不是下载
-
-
-# 具有上传功能的页面
-# @app.route('/test/upload')
-# def upload_test():
-#     return render_template('Home1.html')
-
 
 @app.route('/publish1')
 def publish1():
@@ -77,10 +70,6 @@ def add():
         else:
             if Serverdatabase.check_words(catalogue) and Serverdatabase.check_words(desc):
                 if Serverdatabase.setCata(catalogue, desc):
-
-
-                    # info = Serverdatabase.getCata()
-                    # return render_template('index.html', info=info)
                     return redirect(url_for('catalogue'))
 
                 else:
@@ -154,7 +143,6 @@ def publish(id):
 
 @app.route('/upload/<id>', methods=['POST', 'GET'], strict_slashes=False)
 def api_upload(id):
-    # return render_template('Publish.html')
     if request.method == 'GET':
         return render_template('Home1.html')
         app.logger.debug('get')
@@ -172,10 +160,6 @@ def api_upload(id):
         #     return "false, please input the abstract."
         if desc == '':
             return "false, please input the highlight."
-        # elif vcode == '':
-        #     return "false, please input the vcode."
-        # elif email == '':
-        #     return "false, please input the email."
         else:
             if Serverdatabase.check_words(title) and Serverdatabase.check_words(abstract) and Serverdatabase.check_words(desc) and Serverdatabase.check_words(vcode) and Serverdatabase.check_words(email):
 
@@ -191,11 +175,7 @@ def api_upload(id):
                         time = datetime.datetime.now()
                         time = str(time)
                         time = time[0:16]
-                        # time = time.strftime("%Y-%m-%d %H:%M")
                         print(os.path.join(file_dir, fname))
-                        # unix_time = int(time.time())
-                        # new_filename = str(unix_time) + '.' + ext
-
                         if ext == 'pdf':
                             f.save(os.path.join(file_dir, fname))
                             if not check_session(100):
@@ -224,23 +204,18 @@ def title(id):
     tool = Tool()
 
     return render_template('article.html', info=info, info1=info1, info2=info2, id=id, info3=info3,tool=tool)
-
+#加密操作
 class Tool:
     def jiami(self, email):
         email3 = email
         count1 = len(email)
         email = email[0:email.rfind('@', 0)]
-        # print(email)
         count = len(email)
         email1 = email[0:int(count / 3)]
         email2 = email[int(count / 3):count]
-        # print(email2)
         email2 = email2.replace(email2, "***")
         email4 = email3[count:count1]
-        # print(email4)
         email5 = email1 + email2 + email4
-        # email = email.replace()
-        # print(email5)
         return email5
 
 @app.route('/comment/<id>',methods=['POST', 'GET'])
@@ -325,11 +300,11 @@ def author(email):
 def like(id):
     color = request.form['color']
     if color == "#ff0000":
-        # info4 =
         Serverdatabase.increase_count(id)
     else:
         Serverdatabase.decrease_count(id)
 
+#生成验证码操作
 class Verify:
     # 生成随机字母
     def rndChar(self):

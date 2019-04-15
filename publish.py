@@ -336,9 +336,7 @@ if __name__ == '__main__':
     Serverdatabase.insert_words('insane')
     Serverdatabase.insert_words('rubbish')
     Serverdatabase.insert_words('nonsense')
-    # Serverdatabase.insert_subject('Medical Sciences','Breast cancer, ebola virus, epidemics, dermatology general, immunity, obesity and neuroscience', 'Medical Sciences,MS,medical sciences,MediSci,MedicalScience,medical science' )
-    #
-    #
+
     Serverdatabase.search('kiko')
 
 

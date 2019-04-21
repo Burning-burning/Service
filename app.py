@@ -1,4 +1,4 @@
-import sqlite3
+
 import os
 from flask import Flask, render_template, send_from_directory, request, jsonify, url_for, redirect, abort
 import time
@@ -9,9 +9,9 @@ import random
 from flask import session
 from flask import request
 
-from werkzeug.utils import secure_filename
+
 from publish import Serverdatabase
-# from datetime import timedelta, datetime
+
 app = Flask(__name__)
 app.config['SECRET_KEY']='123456'
 app.config['MAX_CONTENT_LENGTH'] = 20 * 1024 * 1024
@@ -93,7 +93,7 @@ def catalogue():
 def forum(id):
     info = Serverdatabase.getArticle(id)
     tool = Tool()
-    # return redirect(url_for(''))
+
     return render_template('publish1.html', info=info, id=id, tool=tool)
 
 
@@ -154,10 +154,6 @@ def api_upload(id):
         vcode = request.form['vcode']
         id1 = str(uuid.uuid4())
         print(id)
-        # if title == '':
-        #     return "false, please input the title."
-        # elif abstract == '':
-        #     return "false, please input the abstract."
         if desc == '':
             return "false, please input the highlight."
         else:
@@ -358,7 +354,6 @@ class Verify:
             captcha += Verify.getrand(1, 4)
             draw.text((60 * t + 10, 10), captcha[t], font=font, fill=Verify.rndColor(self))
         session['captcha'] = captcha
-        # image.show()
         image.save('static/vcode/vcode.jpg', 'jpeg')
 
 if __name__ == '__main__':

@@ -17,10 +17,7 @@ app.config['SECRET_KEY']='123456'
 app.config['MAX_CONTENT_LENGTH'] = 20 * 1024 * 1024
 
 
-#
-# @app.route('/')
-# def hello_world():
-#     return 'Hello World!'
+
 
 
 @app.route('/Publish')

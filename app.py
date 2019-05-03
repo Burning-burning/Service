@@ -8,14 +8,15 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import random
 from flask import session
 from flask import request
-
+from datetime import datetime, timedelta
 
 from publish import Serverdatabase
 
 app = Flask(__name__)
 app.config['SECRET_KEY']='123456'
 app.config['MAX_CONTENT_LENGTH'] = 20 * 1024 * 1024
-
+app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = timedelta(seconds=1)
 
 
 

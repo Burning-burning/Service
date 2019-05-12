@@ -336,6 +336,13 @@ if __name__ == '__main__':
     Serverdatabase.insert_words('insane')
     Serverdatabase.insert_words('rubbish')
     Serverdatabase.insert_words('nonsense')
+    Serverdatabase.insert_words('你是狗')
+    Serverdatabase.insert_words('傻逼')
+    Serverdatabase.insert_words('他妈的')
+    Serverdatabase.insert_words('nmsl')
+    Serverdatabase.insert_words('智障')
+    Serverdatabase.insert_words('脑子坏掉了')
+    Serverdatabase.insert_words('有毛病')
 
     Serverdatabase.search('kiko')
 

@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
     <style type="text/css">
 #head{
 	align-content: center;
@@ -67,25 +69,16 @@ background-color:aliceblue;
 }
 
 </style>
-<script>
-    function demo1(){
-        document.getElementById("input1").style.backgroundColor = "red";
-    }
-    function demo2(){
-        document.getElementById("input2").style.backgroundColor = "red";
-    }
-    function demo3(){
-        document.getElementById("input3").style.backgroundColor = "red";
-    }
-</script>
+
 </head>
 <body>
+
 <div id="head">
   <h1 id="h1">OUR ARTICLE CATALOGUE</h1>
 </div>
 <div id="select">
 <form action="search" method="Post" align="center"><br/>
-<input type="text" name="search_content" class="input" id="input1" onfocus = "demo1()">
+<input type="text" name="search_content" class="input" id="input1" >
 <input type="submit" value="Search" class="lhc">
 </form>
 </div>
@@ -100,8 +93,8 @@ background-color:aliceblue;
 
 <form action="/add" method="post" align="center">
 Add other catalogue:
-<input type="text" name="catalogue" class="input" id="input2" onfocus = "demo2()"><br/><br/>
-Add catalogue's desc:<input type="text" name="desc" class="input" id="input3" onfocus = "demo3()"><br/><br/>
+<input type="text" name="catalogue" class="input" id="input2" ><br/><br/>
+Add catalogue's desc:<input type="text" name="desc" class="input" id="input3" ><br/><br/>
 <input type="submit" value="Add" style = "width: 60px; height: 30px;" >
 </form>
 </body>

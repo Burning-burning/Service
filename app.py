@@ -166,7 +166,7 @@ def api_upload(id):
                         fname = f.filename
                         ext = fname.rsplit('.', 1)[1]  # 获取文件后缀
                         path = str(os.path.join(file_dir, fname))
-                        time = datetime.datetime.now()
+                        time = datetime.now()
                         time = str(time)
                         time = time[0:16]
                         print(os.path.join(file_dir, fname))
@@ -225,7 +225,7 @@ def comment(id):
         if Serverdatabase.check_words(comment) and Serverdatabase.check_words(email) and Serverdatabase.check_words(
                 vcode):
             if session['captcha'] == vcode:
-                time = datetime.datetime.now()
+                time = datetime.now()
                 time = str(time)
                 time = time[0:16]
                 Serverdatabase.insert_comment(id, comment, email, time)

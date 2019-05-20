@@ -345,6 +345,10 @@ if __name__ == '__main__':
     Serverdatabase.insert_words('有毛病')
 
     Serverdatabase.search('kiko')
+    Serverdatabase.insert_subject('Computer Sciences','Machine learning, computational complexity, computational biology and computational linguistics','computer science,'
+                                                         'Computer Science, computerscience,'
+                                                         'CompSci, cs, computerScience, Computerscience, Cs, cS, ComputerScience,'
+                                                         ' CS, Computer Sciences');
 
 
 

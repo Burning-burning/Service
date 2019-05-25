@@ -137,8 +137,8 @@
       email:{{ tool.jiami(item[3]) }}
 
       <br/>
-      <p class="like1">&#10084;</p>
-
+      like: <div class="like1">&#10084;</div>
+        don't like: <div class="notlike1">&#10084;</div>
 {#      <button id="btn_zan">0</button>&nbsp;&nbsp;#}
       time: {{ item[4] }}
 {#  don't like:<button id="btn_cai">0</button>#}
@@ -238,6 +238,11 @@
     <script>
         $(document).ready(function () {
             $(".like1").click(function () {
+                $(this).toggleClass('cs');
+            })
+        })
+         $(document).ready(function () {
+            $(".notlike1").click(function () {
                 $(this).toggleClass('cs');
             })
         })

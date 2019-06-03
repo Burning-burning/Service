@@ -331,7 +331,7 @@ class Verify:
         return (random.randint(64, 255), random.randint(64, 255), random.randint(64, 255))
 
     def show(self):
-        width = 60 * 4  # 生成四个随机字母
+        width = 60 * 5  # 生成四个随机字母
         height = 60
 
         image = Image.new('RGB', (width, height), (255, 255, 255))
@@ -348,8 +348,8 @@ class Verify:
 
         # 输出文字:
         captcha = ''
-        for t in range(4):
-            captcha += Verify.getrand(1, 4)
+        for t in range(5):
+            captcha += Verify.getrand(1, 5)
             draw.text((60 * t + 10, 10), captcha[t], font=font, fill=Verify.rndColor(self))
         session['captcha'] = captcha
         image.save('static/vcode/vcode.jpg', 'jpeg')
